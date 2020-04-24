@@ -12,7 +12,7 @@ const getters = {
     },
     America: (state) => {
         return state.countries.filter(
-            (country) => (country.region = 'Americas')
+            (country) => country.region === 'Americas'
         );
     },
     Asia: (state) => {

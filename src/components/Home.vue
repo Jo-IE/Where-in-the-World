@@ -4,7 +4,12 @@
         <v-row class="grey lighten-4 pt-5">
             <v-col cols="12" offset-md="1" md="5">
                 <v-toolbar dense>
-                    <v-text-field hide-details prepend-icon="mdi-magnify" single-line></v-text-field>
+                    <v-text-field
+                        v-model="country"
+                        hide-details
+                        prepend-icon="mdi-magnify"
+                        single-line
+                    ></v-text-field>
                 </v-toolbar>
             </v-col>
             <v-col cols="12" offset-md="2" md="3">
@@ -76,7 +81,8 @@ export default {
     data: function() {
         return {
             countries: this.$store.getters.AllCountries,
-            regions: ["Africa", "America", "Asia", "Europe", "Oceania"]
+            regions: ["Africa", "America", "Asia", "Europe", "Oceania"],
+            country: ""
         };
     },
     methods: {
@@ -104,6 +110,17 @@ export default {
         },
         ...mapActions(["getCountries"])
     },
+    watch: {
+        country: function(val) {
+            if (val !== "") {
+                this.countries = this.$store.getters.AllCountries.filter(
+                    item => item.name.toLowerCase() === val.toLowerCase()
+                );
+            } else if (val === "") {
+                this.countries = this.$store.getters.AllCountries;
+            }
+        }
+    },
     computed: {
         ...mapGetters([
             "AllCountries",
@@ -115,7 +132,9 @@ export default {
         ])
     },
     created() {
-        this.$store.dispatch("getCountries").then(() => console.log("hi"));
+        this.$store
+            .dispatch("getCountries")
+            .then(() => console.log(this.$store.getters.AllCountries));
     }
 };
 </script>
