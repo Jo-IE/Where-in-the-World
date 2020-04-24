@@ -8,7 +8,7 @@ const getters = {
         return state.countries;
     },
     Africa: (state) => {
-        return state.countries.filter((country) => (country.region = 'Africa'));
+        return state.countries.filter((country) => country.region === 'Africa');
     },
     America: (state) => {
         return state.countries.filter(
@@ -16,14 +16,14 @@ const getters = {
         );
     },
     Asia: (state) => {
-        return state.countries.filter((country) => (country.region = 'Asia'));
+        return state.countries.filter((country) => country.region === 'Asia');
     },
     Europe: (state) => {
-        return state.countries.filter((country) => (country.region = 'Europe'));
+        return state.countries.filter((country) => country.region === 'Europe');
     },
     Oceania: (state) => {
         return state.countries.filter(
-            (country) => (country.region = 'Oceania')
+            (country) => country.region === 'Oceania'
         );
     },
 };

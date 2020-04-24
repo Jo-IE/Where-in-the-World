@@ -19,7 +19,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="countries.length >0" class="grey lighten-4">
+        <v-row v-if="countries.length&& countries.length >0" class="grey lighten-4">
             <v-col
                 v-for="country in countries"
                 :key="country.name"
@@ -75,15 +75,32 @@ export default {
     },
     data: function() {
         return {
-            countries: [],
+            countries: this.$store.getters.AllCountries,
             regions: ["Africa", "America", "Asia", "Europe", "Oceania"]
         };
     },
     methods: {
         filterCountries(val) {
-            console.log(val);
-            this.countries = this.$store.getters.val;
-            console.log(this.countries);
+            switch (val) {
+                case "Africa":
+                    this.countries = this.$store.getters.Africa;
+                    break;
+                case "Europe":
+                    this.countries = this.$store.getters.Europe;
+                    break;
+                case "America":
+                    this.countries = this.$store.getters.America;
+                    break;
+                case "Oceania":
+                    this.countries = this.$store.getters.Oceania;
+                    break;
+                case "Asia":
+                    this.countries = this.$store.getters.Asia;
+                    break;
+                default:
+                    break;
+            }
+            console.log(this.$store.getters.Africa);
         },
         ...mapActions(["getCountries"])
     },
@@ -98,9 +115,7 @@ export default {
         ])
     },
     created() {
-        this.$store
-            .dispatch("getCountries")
-            .then(() => (this.countries = this.$store.getters.AllCountries));
+        this.$store.dispatch("getCountries").then(() => console.log("hi"));
     }
 };
 </script>
