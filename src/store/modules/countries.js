@@ -1,42 +1,56 @@
 const state = {
     countries: [],
+};
 
-  }
-
-  // getters
-  const getters = {
-    countries: state.countries
+// getters
+const getters = {
+    AllCountries: (state) => {
+        return state.countries;
     },
-
-
-
-  // actions
-  const actions = {
-    getCountries ({ commit, state }) {
-      fetch('https://restcountries.eu/rest/v2/all')
-      .then(res => {
-          return res.json()
-      }).then((data) => {
-          commit('setCountries', data)
-      })
+    Africa: (state) => {
+        return state.countries.filter((country) => (country.region = 'Africa'));
     },
-
-
-  }
-
-  // mutations
-  const mutations = {
-    setCountries (state, data) {
-      state.countries = data
+    America: (state) => {
+        return state.countries.filter(
+            (country) => (country.region = 'Americas')
+        );
     },
+    Asia: (state) => {
+        return state.countries.filter((country) => (country.region = 'Asia'));
+    },
+    Europe: (state) => {
+        return state.countries.filter((country) => (country.region = 'Europe'));
+    },
+    Oceania: (state) => {
+        return state.countries.filter(
+            (country) => (country.region = 'Oceania')
+        );
+    },
+};
 
+// actions
+const actions = {
+    getCountries({ commit }) {
+        fetch('https://restcountries.eu/rest/v2/all')
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                commit('setCountries', data);
+            });
+    },
+};
 
-  }
+// mutations
+const mutations = {
+    setCountries(state, data) {
+        state.countries = data;
+    },
+};
 
-  export default {
-
+export default {
     state,
     getters,
     actions,
-    mutations
-  }
+    mutations,
+};
