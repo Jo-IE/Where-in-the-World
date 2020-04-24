@@ -24,7 +24,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="countries.length&& countries.length >0" class="grey lighten-4">
+        <v-row v-if="countries.length&& countries.length > 0" class="grey lighten-4">
             <v-col
                 v-for="country in countries"
                 :key="country.name"
@@ -36,7 +36,9 @@
                 align-content="center"
             >
                 <v-card class="mx-auto my-12" max-width="374">
-                    <v-img height="250" :src="country.flag"></v-img>
+                    <router-link :to="{ name: 'detail', params: { name: country.name }}">
+                        <v-img height="250" :src="country.flag"></v-img>
+                    </router-link>
 
                     <v-card-title>{{country.name}}</v-card-title>
 
@@ -80,7 +82,7 @@ export default {
     },
     data: function() {
         return {
-            countries: this.$store.getters.AllCountries,
+            countries: [],
             regions: ["Africa", "America", "Asia", "Europe", "Oceania"],
             country: ""
         };
@@ -108,6 +110,7 @@ export default {
             }
             console.log(this.$store.getters.Africa);
         },
+
         ...mapActions(["getCountries"])
     },
     watch: {
@@ -132,9 +135,10 @@ export default {
         ])
     },
     created() {
-        this.$store
-            .dispatch("getCountries")
-            .then(() => console.log(this.$store.getters.AllCountries));
+        this.$store.dispatch("getCountries").then(() => {
+            this.countries = this.$store.getters.AllCountries;
+            console.log(this.countries);
+        });
     }
 };
 </script>
