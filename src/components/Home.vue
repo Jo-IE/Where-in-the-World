@@ -1,14 +1,16 @@
 <template>
     <v-container fluid>
         <Header />
-        <v-row>
-            <v-col cols="12" offset-md="1" md="5" class="pt-5">
+        <v-row class="grey lighten-4 pt-5">
+            <v-col cols="12" offset-md="1" md="5">
                 <v-toolbar dense>
                     <v-text-field hide-details prepend-icon="mdi-magnify" single-line></v-text-field>
                 </v-toolbar>
             </v-col>
             <v-col cols="12" offset-md="2" md="3">
                 <v-select
+                    item-text="text"
+                    item-value="value"
                     :items="regions"
                     label="Filter By Region"
                     solo
@@ -16,47 +18,51 @@
                 ></v-select>
             </v-col>
         </v-row>
-        <v-container fluid>
-            <v-row v-if="countries.length >0">
-                <v-col
-                    v-for="country in countries"
-                    :key="country.name"
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    lg="3"
-                    justify="center"
-                    align-content="center"
-                >
-                    <v-card class="mx-auto my-12" max-width="374">
-                        <v-img height="250" :src="country.flag"></v-img>
 
-                        <v-card-title>{{country.name}}</v-card-title>
+        <v-row v-if="countries.length >0" class="grey lighten-4">
+            <v-col
+                v-for="country in countries"
+                :key="country.name"
+                cols="12"
+                sm="6"
+                md="4"
+                lg="3"
+                justify="center"
+                align-content="center"
+            >
+                <v-card class="mx-auto my-12" max-width="374">
+                    <v-img height="250" :src="country.flag"></v-img>
 
-                        <v-card-text>
-                            <div>
-                                <p>
-                                    Population:
-                                    <span>{{country.population}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    Region:
-                                    <span>{{country.region}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    Capital:
-                                    <span>{{country.capital}}</span>
-                                </p>
-                            </div>
-                        </v-card-text>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
+                    <v-card-title>{{country.name}}</v-card-title>
+
+                    <v-card-text>
+                        <div>
+                            <p>
+                                <span class="font-weight-bold">Population:</span>
+                                {{country.population}}
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <span class="font-weight-bold">Region:</span>
+                                {{country.region}}
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <span class="font-weight-bold">Capital:</span>
+                                {{country.capital}}
+                            </p>
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+        <v-row v-else class="text-center my-5">
+            <v-col cols="12">
+                <v-progress-circular :size="70" :width="7" indeterminate color="primary"></v-progress-circular>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -69,23 +75,32 @@ export default {
     },
     data: function() {
         return {
-            countries: this.$store.getters.AllCountries,
+            countries: [],
             regions: ["Africa", "America", "Asia", "Europe", "Oceania"]
         };
     },
     methods: {
         filterCountries(val) {
             console.log(val);
+            this.countries = this.$store.getters.val;
+            console.log(this.countries);
         },
         ...mapActions(["getCountries"])
     },
     computed: {
-        ...mapGetters(["AllCountries"])
+        ...mapGetters([
+            "AllCountries",
+            "Africa",
+            "America",
+            "Asia",
+            "Europe",
+            "Oceania"
+        ])
     },
     created() {
         this.$store
             .dispatch("getCountries")
-            .then(() => console.log(this.countries));
+            .then(() => (this.countries = this.$store.getters.AllCountries));
     }
 };
 </script>
