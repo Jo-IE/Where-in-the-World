@@ -11,6 +11,7 @@
 import Header from "../Header";
 import { mapGetters, mapActions } from "vuex";
 export default {
+    name: "Detail",
     components: {
         Header
     },

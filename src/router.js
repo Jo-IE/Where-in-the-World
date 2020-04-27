@@ -1,12 +1,8 @@
-import Vue from 'vue';
-
 import VueRouter from 'vue-router';
 
 //import Header from './Header.vue';
 import Home from './components/Home';
 import Detail from './components/Detail';
-
-Vue.use(VueRouter);
 
 const routes = [
     { path: '/', component: Home },
