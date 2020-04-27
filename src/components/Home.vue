@@ -24,7 +24,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="countries.length&& countries.length > 0" class="grey lighten-4">
+        <v-row v-if="countries && countries.length > 0" class="grey lighten-4">
             <v-col
                 v-for="country in countries"
                 :key="country.name"
