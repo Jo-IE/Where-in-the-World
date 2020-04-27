@@ -1,8 +1,8 @@
 <template>
     <v-container fluid>
         <Header />
-        <v-row class="grey lighten-4 pt-5">
-            <v-col cols="12" offset-md="1" md="5">
+        <v-row class="pt-5">
+            <v-col cols="12" class="ml-2" md="5">
                 <v-toolbar dense>
                     <v-text-field
                         v-model="country"
@@ -12,7 +12,7 @@
                     ></v-text-field>
                 </v-toolbar>
             </v-col>
-            <v-col cols="12" offset-md="2" md="3">
+            <v-col cols="12" offset-md="3" md="3">
                 <v-select
                     item-text="text"
                     item-value="value"
@@ -24,7 +24,7 @@
             </v-col>
         </v-row>
 
-        <v-row v-if="countries && countries.length > 0" class="grey lighten-4">
+        <v-row v-if="countries && countries.length > 0" class>
             <v-col
                 v-for="country in countries"
                 :key="country.name"

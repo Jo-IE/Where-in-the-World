@@ -2,9 +2,9 @@
     <v-container fluid>
         <Header />
         <v-row class="pt-5">
-            <v-col cols="12" offset-md="1" md="5">
+            <v-col cols="12" class="ml-2" md="5">
                 <router-link to="/">
-                    <v-btn class="px-2 white">
+                    <v-btn class="px-2">
                         <v-icon left>mdi-arrow-left</v-icon>Back
                     </v-btn>
                 </router-link>
@@ -43,7 +43,7 @@
                         </p>
                         <p>
                             <span class="font-weight-bold">Top Level Domain:</span>
-                            {{selected.topLevelDomain}}
+                            {{selected.topLevelDomain[0]}}
                         </p>
                         <p>
                             <span class="font-weight-bold">Currencies:</span>
