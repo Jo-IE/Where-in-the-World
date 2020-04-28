@@ -4,7 +4,7 @@
         <v-row class="pt-5">
             <v-col cols="12" class="ml-2" md="5">
                 <router-link to="/">
-                    <v-btn class="px-2">
+                    <v-btn depressed width="120" class="px-2">
                         <v-icon left>mdi-arrow-left</v-icon>Back
                     </v-btn>
                 </router-link>
@@ -67,7 +67,7 @@
                         <span class="font-weight-bold">Border Countries:</span>
                         <span v-if="selected.borders.length===0">None</span>
                         <span v-for="border in selected.borders" :key="border" class="px-2">
-                            <v-btn raised class="text-capitalize mt-2">{{getFullCountry(border)}}</v-btn>
+                            <v-btn depressed class="text-capitalize mt-2">{{getFullCountry(border)}}</v-btn>
                         </span>
                     </p>
                 </div>
