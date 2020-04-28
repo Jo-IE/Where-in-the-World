@@ -9,6 +9,10 @@
                         hide-details
                         prepend-icon="mdi-magnify"
                         single-line
+                        rounded
+                        solo
+                        flat
+                        color="grey lighten-4"
                     ></v-text-field>
                 </v-toolbar>
             </v-col>
@@ -19,12 +23,13 @@
                     :items="regions"
                     label="Filter By Region"
                     solo
+                    color="grey lighten-4"
                     v-on:change="filterCountries"
                 ></v-select>
             </v-col>
         </v-row>
 
-        <v-row v-if="countries && countries.length > 0" class>
+        <v-row v-if="countries && countries.length > 0">
             <v-col
                 v-for="country in countries"
                 :key="country.name"

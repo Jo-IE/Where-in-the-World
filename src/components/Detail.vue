@@ -67,10 +67,7 @@
                         <span class="font-weight-bold">Border Countries:</span>
                         <span v-if="selected.borders.length===0">None</span>
                         <span v-for="border in selected.borders" :key="border" class="px-2">
-                            <v-btn
-                                raised
-                                class="text-capitalize white mt-2"
-                            >{{getFullCountry(border)}}</v-btn>
+                            <v-btn raised class="text-capitalize mt-2">{{getFullCountry(border)}}</v-btn>
                         </span>
                     </p>
                 </div>
