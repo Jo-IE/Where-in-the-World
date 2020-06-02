@@ -141,7 +141,7 @@ export default {
         ])
     },
     created() {
-        this.$store.dispatch("getCountries").then(() => {
+        return this.$store.dispatch("getCountries").then(() => {
             this.countries = this.$store.getters.AllCountries;
             console.log(this.countries);
         });
